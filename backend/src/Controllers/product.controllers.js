@@ -18,17 +18,13 @@ export const renderProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    console.log(req.file)
     const newProduct = new Product(req.body);
     console.log(newProduct)
-
-    newProduct.img.data = fs.readFileSync(req.file.path)
-    newProduct.img.contentType = req.file.mimetype
     
 //<    console.log(newProduct)
 
     const savedProduct = await newProduct.save();
-    res.json({ savedProduct });
+    res.json(savedProduct);
   } catch (error) {
     handleError(req, res, error);
   }
@@ -72,7 +68,7 @@ export const editProduct = async (req, res) => {
     }
     const newProduct = Object.assign({}, req.body);
     const product = await Product.findByIdAndUpdate(id, newProduct);
-    res.json(newProduct);
+    res.json(product);
   } catch (error) {
     handleError(req, res, error);
   }
@@ -91,9 +87,8 @@ export const deleteProduct = async (req, res) => {
       res.status(404).json({ msg: "no existe el product que se va a borrar" });
       return;
     }
-    const delProduct = await Product.findByIdAndDelete({ _id: id });
+    await Product.findByIdAndDelete({ _id: id });
     res.json({ msg: "Producto Borrado" });
-    res.json(delProduct);
   } catch (error) {
     handleError(req, res, error);
   }

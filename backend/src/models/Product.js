@@ -20,12 +20,10 @@ const productSchema = new Schema(
     client: {
       type: Schema.Types.ObjectId,
       ref: "client",
-      required: true,
     },
     user: {
       type: Schema.Types.ObjectId,
       ref: "user",
-      required: true,
     },
   },
   {
