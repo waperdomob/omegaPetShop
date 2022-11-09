@@ -1,4 +1,4 @@
-export const handleError = (req, res, error) => {
+const handleError = (req, res, error) => {
   if (error.name === "ValidationError") {
     let errors = {};
 
@@ -10,3 +10,5 @@ export const handleError = (req, res, error) => {
   }
   res.status(500).send("Something went wrong");
 };
+
+module.exports = {handleError}

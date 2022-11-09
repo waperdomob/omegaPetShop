@@ -1,12 +1,12 @@
-import { fstat } from "fs-extra";
-import { isValidObjectId } from "mongoose";
-import { handleError } from "../helper/handleError";
-import fs from "fs"
 
-import Product from "../models/Product";
-import { upload } from "../middleware/storage";
+const { isValidObjectId } = require("mongoose");
+const { handleError } = require("../helper/handleError");
 
-export const renderProduct = async (req, res) => {
+
+const Product = require("../models/Product");
+const { upload } = require("../middleware/storage");
+
+const renderProduct = async (req, res) => {
   try {
     const product = await Product.find();
     res.json(product);
@@ -16,7 +16,7 @@ export const renderProduct = async (req, res) => {
   }
 };
 
-export const createProduct = async (req, res) => {
+const createProduct = async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     console.log(newProduct)
@@ -29,7 +29,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
-export const saveImagen = async (req = request, res = response) => {
+const saveImagen = async (req = request, res = response) => {
 
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({ mensaje: "No se encontro el imagen" })
@@ -50,7 +50,7 @@ export const saveImagen = async (req = request, res = response) => {
 
 }
 
-export const renderProductEdit = async (req, res) => {
+const renderProductEdit = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -71,7 +71,7 @@ export const renderProductEdit = async (req, res) => {
   }
 };
 
-export const editProduct = async (req, res) => {
+const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -94,7 +94,7 @@ export const editProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -113,3 +113,5 @@ export const deleteProduct = async (req, res) => {
     handleError(req, res, error);
   }
 };
+
+module.exports = {renderProduct, createProduct, saveImagen, renderProductEdit, editProduct, deleteProduct}

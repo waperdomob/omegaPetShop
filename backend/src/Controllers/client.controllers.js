@@ -1,8 +1,8 @@
-import { isValidObjectId } from "mongoose";
-import { handleError } from "../helper/handleError";
-import Client from "../models/Client";
+const { isValidObjectId } = require("mongoose") ;
+const { handleError } = require("../helper/handleError") ;
+const Client = require("../models/Client") ;
 
-export const renderClient = async (req, res) => {
+const renderClient = async (req, res) => {
   try {
     const client = await Client.find();
     res.json(client);
@@ -12,7 +12,7 @@ export const renderClient = async (req, res) => {
   }
 };
 
-export const createClient = async (req, res) => {
+const createClient = async (req, res) => {
   try {
     const client = Client(req.body);
     const savedClient = await client.save();
@@ -22,7 +22,7 @@ export const createClient = async (req, res) => {
   }
 };
 
-export const renderClientEdit = async (req, res) => {
+const renderClientEdit = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -43,7 +43,7 @@ export const renderClientEdit = async (req, res) => {
   }
 };
 
-export const editClient = async (req, res) => {
+const editClient = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -67,7 +67,7 @@ export const editClient = async (req, res) => {
   }
 };
 
-export const deleteClient = async (req, res) => {
+const deleteClient = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -87,3 +87,5 @@ export const deleteClient = async (req, res) => {
     handleError(req, res, error);
   }
 };
+
+module.exports = {renderClient, createClient, renderClientEdit, editClient, deleteClient}

@@ -1,7 +1,7 @@
-import { verifyToken } from "../helper/generateToken";
-import User from "../models/User";
+const { verifyToken } = require("../helper/generateToken");
+const User = require("../models/User");
 
-export const checkRoleAuth = (roles) => async (req, res, next) => {
+const checkRoleAuth = (roles) => async (req, res, next) => {
   let token = await req.headers["authorization"];
   if (!token) {
     //si  no existe token a la mierda
@@ -26,3 +26,5 @@ export const checkRoleAuth = (roles) => async (req, res, next) => {
   }
   next(); // atravesaste el campo minado o eres la monda o el token es valido
 };
+
+module.exports = {checkRoleAuth}

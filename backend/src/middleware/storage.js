@@ -1,5 +1,5 @@
-import path from "path";
-import multer from "multer";
+const path = require ("path");
+const multer = require ("multer");
 const { v4: uuidV4 } = require('uuid');
 
 
@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   }
 })
 
-export const upload = multer({
+const upload = multer({
   storage : storage,
   dest: path.join(__dirname, '../public/uploads'),
   limits: {filesize:3000000},
@@ -25,3 +25,5 @@ export const upload = multer({
     cb("error : tipo de archivo no valido")
   }
 }).single('image')
+
+module.exports = {upload}

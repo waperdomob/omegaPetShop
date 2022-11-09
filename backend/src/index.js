@@ -1,6 +1,3 @@
-import app from "./app";
-import "./database";
-import { PORT } from "./config";
+const Server = require("./config/server");
+const servidor = new Server()
 
-app.listen(PORT);
-console.log(`server on port ${PORT}`);

@@ -1,7 +1,7 @@
-import { verifyToken } from "../helper/generateToken";
-import User from "../models/User";
+const { verifyToken } = require( "../helper/generateToken");
+const User = require( "../models/User");
 
-export const checkAuth = async(req, res, next) =>{
+const checkAuth = async(req, res, next) =>{
     
     let token = await req.headers["authorization"] //existe el encabezado de autorizacion?
     if ( ! token ){ //si  no existe token a la mierda
@@ -25,3 +25,5 @@ export const checkAuth = async(req, res, next) =>{
     }
     next()  //si el token sortea el campo minado o el hacker es la monda o el token es valido
 }
+
+module.exports = {checkAuth}

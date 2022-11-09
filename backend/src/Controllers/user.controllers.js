@@ -1,9 +1,9 @@
-import User from "../models/User";
-import { encrypt, compare } from "../helper/handleBcrypt";
-import { isValidObjectId } from "mongoose";
-import { handleError } from "../helper/handleError";
+const User = require( "../models/User");
+const { encrypt, compare } = require( "../helper/handleBcrypt");
+const { isValidObjectId } = require( "mongoose");
+const { handleError } = require( "../helper/handleError");
 
-export const renderUser = async (req, res) => {
+const renderUser = async (req, res) => {
   try {
     const user = await User.find();
     res.json(user);
@@ -13,7 +13,7 @@ export const renderUser = async (req, res) => {
   }
 };
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const users = User(req.body);
     users.password = await encrypt(users.password);
@@ -24,7 +24,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const renderUserEdit = async (req, res) => {
+const renderUserEdit = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -45,7 +45,7 @@ export const renderUserEdit = async (req, res) => {
   }
 };
 
-export const editUser = async (req, res) => {
+const editUser = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -74,7 +74,7 @@ export const editUser = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -96,7 +96,7 @@ export const deleteUser = async (req, res) => {
 };
 
 //
-export const toogleUserActive = async (req, res) => {
+const toogleUserActive = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -118,3 +118,5 @@ export const toogleUserActive = async (req, res) => {
     handleError(req, res, error);
   }
 };
+
+module.exports = {renderUser, createUser, renderUserEdit, toogleUserActive, editUser, deleteUser}

@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import isEmail from "validator/lib/isEmail";
+const {Schema, model} = require("mongoose")
+const isEmail = require("validator/lib/isEmail");
 
 const clientSchema = new Schema(
   {
@@ -35,4 +35,6 @@ const clientSchema = new Schema(
   }
 );
 
-export default model("client", clientSchema);
+const ClientModel = model("client", clientSchema)
+
+module.exports = ClientModel

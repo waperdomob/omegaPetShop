@@ -1,8 +1,8 @@
 import express, { application } from "express";
 
-import userRoutes from "./routes/user.routes";
-import loginRoutes from "./routes/login.routes";
-import productRoutes from "./routes/product.routes";
+import userRoutes from "./routes/user";
+import loginRoutes from "./routes/login";
+import productRoutes from "./routes/product";
 import clientRoutes from "./routes/client.routes";
 
 

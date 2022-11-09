@@ -1,8 +1,8 @@
-import { compare } from "../helper/handleBcrypt";
-import { tokenSign } from "../helper/generateToken";
-import User from "../models/User";
+const { compare } = require("../helper/handleBcrypt") ;
+const { tokenSign } = require( "../helper/generateToken");
+const User = require("../models/User") ;
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -31,3 +31,4 @@ export const login = async (req, res) => {
     handleError(req, res, error);
   }
 };
+module.exports = {login}

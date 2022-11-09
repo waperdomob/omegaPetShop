@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export const tokenSign = async (user) => {
+const tokenSign = async (user) => {
   return jwt.sign(
     {
       _id: user._id,
@@ -13,10 +13,11 @@ export const tokenSign = async (user) => {
   );
 };
 
-export const verifyToken = async (token) => {
+const verifyToken = async (token) => {
   try {
     return jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
     return null;
   }
 };
+module.exports = {tokenSign,verifyToken}

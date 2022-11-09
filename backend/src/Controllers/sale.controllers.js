@@ -1,12 +1,12 @@
-import { fstat } from "fs-extra";
-import { isValidObjectId } from "mongoose";
-import { handleError } from "../helper/handleError";
-import fs from "fs"
+const { fstat } = require("fs-extra") ;
+const { isValidObjectId } = require("mongoose") ;
+const { handleError } = require("../helper/handleError") ;
+const fs = require("fs") 
 
-import Sale from "../models/Sale";
-import { upload } from "../middleware/storage";
+const Sale = require("../models/Sale") ;
+const { upload } = require("../middleware/storage");
 
-export const renderSale = async (req, res) => {
+const renderSale = async (req, res) => {
   try {
     const sale = await Sale.find();
     res.json(sale);
@@ -16,7 +16,7 @@ export const renderSale = async (req, res) => {
   }
 };
 
-export const createSale = async (req, res) => {
+const createSale = async (req, res) => {
   try {
     const newSale = new Sale(req.body);
     console.log(newSale)
@@ -29,8 +29,7 @@ export const createSale = async (req, res) => {
   }
 };
 
-
-export const renderSaleEdit = async (req, res) => {
+const renderSaleEdit = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -51,7 +50,7 @@ export const renderSaleEdit = async (req, res) => {
   }
 };
 
-export const editSale = async (req, res) => {
+const editSale = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -74,7 +73,7 @@ export const editSale = async (req, res) => {
   }
 };
 
-export const deleteSale = async (req, res) => {
+const deleteSale = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
@@ -93,3 +92,5 @@ export const deleteSale = async (req, res) => {
     handleError(req, res, error);
   }
 };
+
+module.exports = {renderSale, createSale, renderSaleEdit, editSale, deleteSale}
