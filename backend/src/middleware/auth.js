@@ -9,9 +9,11 @@ const checkAuth = async(req, res, next) =>{
             res.send({error : "tu por aqui no pasas"})
             return
     }
-    token = token.split(' ').pop()
-    const tokenData = await verifyToken(token)
+    token = token.split(" ").pop()
+    
 
+    const tokenData = await verifyToken(token)
+    console.log(token);
     if ( tokenData === null){ //el token no pasa la prueba... a la mierda
         res.status(409)
         res.send({error : "tu por aqui no pasas"})

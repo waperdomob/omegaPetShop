@@ -1,6 +1,11 @@
 const express = require("express")
+
 const routerProducto = require("../routes/product")
 const routerUsuario = require("../routes/user")
+const routerCliente = require("../routes/client")
+const routerSale = require("../routes/sale")
+const routerLogin = require("../routes/login")
+
 const connectDB = require("./database")
 const fileUpload = require("express-fileupload")
 
@@ -25,6 +30,10 @@ class Server {
   rutas() {
     this.aplicacion.use("/usuario", routerUsuario)
     this.aplicacion.use("/producto", routerProducto)
+    this.aplicacion.use("/venta", routerSale)
+    this.aplicacion.use("/cliente", routerCliente)
+    this.aplicacion.use("/login", routerLogin)
+
   }
 }
 

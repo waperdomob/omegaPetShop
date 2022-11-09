@@ -16,6 +16,7 @@ const renderUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const users = User(req.body);
+    console.log(users);
     users.password = await encrypt(users.password);
     const userSaved = await users.save();
     res.json({ msg: "usuarios salvado" });

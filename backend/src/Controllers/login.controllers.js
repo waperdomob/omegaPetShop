@@ -1,5 +1,7 @@
 const { compare } = require("../helper/handleBcrypt") ;
 const { tokenSign } = require( "../helper/generateToken");
+const { handleError } = require("../helper/handleError");
+
 const User = require("../models/User") ;
 
 const login = async (req, res) => {
@@ -16,17 +18,21 @@ const login = async (req, res) => {
       res.json({ msg: "User not active" });
       return;
     }
+    
     const chechPassword = await compare(password, user.password);
     const tokenSession = await tokenSign(user);
+    
     if (!chechPassword) {
       res.status(409);
       res.json({ msg: "Invalid password" });
       return;
     }
+    
     res.json({
       data: user,
       tokenSession,
     });
+    
   } catch (error) {
     handleError(req, res, error);
   }

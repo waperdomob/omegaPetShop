@@ -6,4 +6,5 @@ const routerLogin = Router();
 
 routerLogin.post("/", login);
 
-export default routerLogin;
+module.exports = routerLogin
+

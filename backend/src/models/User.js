@@ -2,10 +2,15 @@ const {Schema, model} = require("mongoose")
 
 const userSchema = new Schema(
   {
-    name: {
+    tipoDoc: {
+      String 
+    },
+    numeroDoc: {
       type: String,
-      required: true,
-      trim: true,
+      required: [true, "¡El numero de documento es obligatorio!"],
+    },
+    name: {
+      nombre: String, apellido: String
     },
     email: {
       type: String,
@@ -14,10 +19,8 @@ const userSchema = new Schema(
       trim: true,
     },
     role: {
-      type: String,
-      required: true,
-      trim: true,
-      default: "user",
+      type: String, enum: [ "CLIENTE", "VENDEDOR", "ADMIN" ] ,
+      default: "VENDEDOR",
     },
     active: {
       type: Boolean,

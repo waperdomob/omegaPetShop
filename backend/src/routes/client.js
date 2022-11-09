@@ -7,6 +7,7 @@ const {
   editClient,
   deleteClient,
 } = require("../Controllers/client.controllers");
+
 const { checkAuth } = require("../middleware/auth");
 const { checkRoleAuth } = require("../middleware/roleAuth");
 
@@ -21,4 +22,4 @@ routerCient.delete("/:id", deleteClient);
 //routerCient.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )
 //routerCient.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )
 
-export default routerCient;
+module.exports = routerCient
