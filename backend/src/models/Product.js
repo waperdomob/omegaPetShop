@@ -14,16 +14,12 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    precio: {
+    precioVenta: {
       type: Number,
     },
-    client: {
-      type: Schema.Types.ObjectId,
-      ref: "client",
-    },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+    imagen: {
+      type: String,      
+      required: false,
     },
   },
   {
@@ -32,4 +28,6 @@ const productSchema = new Schema(
   }
 );
 
-export default model("product", productSchema);
+const ProductModel = model("product", productSchema)
+
+module.exports = ProductModel

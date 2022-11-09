@@ -21,14 +21,34 @@ export const createProduct = async (req, res) => {
     const newProduct = new Product(req.body);
     console.log(newProduct)
     
-//<    console.log(newProduct)
-
     const savedProduct = await newProduct.save();
-    res.json(savedProduct);
+    //res.json(savedProduct);
+    res.status(201).send({mensaje: "se creo el producto", savedProduct});
   } catch (error) {
     handleError(req, res, error);
   }
 };
+
+export const saveImagen = async (req = request, res = response) => {
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).json({ mensaje: "No se encontro el imagen" })
+  };
+
+  // Extrae el imagen segun el nombre (en este caso "imagen")
+  const {imagen} = req.files
+  const imagenName = imagen.name.split(".")
+  const extension = imagenName[imagenName - 1 ]
+  const uploadPath = path.join(__dirname, "../imagenes/", imagen.name)
+
+  // Usa el metodo mv() para colocar el imagen en cualquier parte del backend
+  imagen.mv(uploadPath, (error) => {
+    if (error) return res.status(500).send(error)
+
+    res.send("imagen cargado corectamente")
+  })
+
+}
 
 export const renderProductEdit = async (req, res) => {
   try {
