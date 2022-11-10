@@ -17,7 +17,7 @@ const checkRoleAuth = (roles) => async (req, res, next) => {
     res.send({ error: "tu por aqui no pasas" });
     return;
   }
-  const userData = await User.findById(tokenData._id); //aqui ya es seguro que hay un token y es valido
+  const userData = await User.findById(tokenData.id); //aqui ya es seguro que hay un token y es valido
   if (![].concat(roles).includes(userData.role)) {
     // no tienes rol pa la operacion? a la mierda
     res.status(409);

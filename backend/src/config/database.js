@@ -2,7 +2,7 @@ const {connect} = require("mongoose")
 const { MONGODB_URI} = require("./config")
 // 1. Conectamos la base de datos
 const connectDB = () => {
-  connect(MONGODB_URI, {
+  connect("mongodb://localhost:27017/petsParadise", {
     useNewUrlParser: true,
     })
     .then(() => {

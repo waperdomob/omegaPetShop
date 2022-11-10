@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const {config} = require ("dotenv");
 config();
+
 const tokenSign = async (user) => {
   return jwt.sign(
     {
@@ -9,14 +10,20 @@ const tokenSign = async (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "2h",
+      expiresIn: "10d",
     }
   );
 };
 
 const verifyToken = async (token) => {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET);
+    if ( jwt.verify(token, process.env.JWT_SECRET)) {
+      return jwt.verify(token, process.env.JWT_SECRET);
+    }
+    else{
+      console.log("mallll");
+      return true;
+    }
   } catch (error) {
     return null;
   }

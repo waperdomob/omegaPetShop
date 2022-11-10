@@ -13,7 +13,7 @@ const { checkRoleAuth } = require("../middleware/roleAuth");
 
 const routerUser = Router();
 
-routerUser.get("/", checkAuth, checkRoleAuth(["user"]), renderUser);
+routerUser.get("/", checkAuth, checkRoleAuth(["VENDEDOR"]), renderUser);
 routerUser.post("/", createUser);
 routerUser.get(
   "/:id",

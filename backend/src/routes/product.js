@@ -14,15 +14,15 @@ const { checkRoleAuth } = require ("../middleware/roleAuth");
 
 const routerProduct = Router();
 
-routerProduct.get("/", renderProduct);
-routerProduct.post("/", createProduct);
-routerProduct.post("/imagen", saveImagen);
-routerProduct.get("/:id", renderProductEdit);
-routerProduct.put("/:id", editProduct);
-routerProduct.delete("/:id", deleteProduct);
+routerProduct.get("/",checkAuth, checkRoleAuth(["VENDEDOR"]), renderProduct);
+routerProduct.post("/",checkAuth, checkRoleAuth(["VENDEDOR"]), createProduct);
+routerProduct.post("/imagen",checkAuth, checkRoleAuth(["VENDEDOR"]), saveImagen);
+routerProduct.get("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), renderProductEdit);
+routerProduct.put("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), editProduct);
+routerProduct.delete("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), deleteProduct);
 
-//routerProduct.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )
-//routerProduct.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )
+//routerProduct.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['VENDEDOR']), toogleUserActive )
+//routerProduct.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['VENDEDOR']), toogleUserActive )
 
 module.exports = routerProduct
 
