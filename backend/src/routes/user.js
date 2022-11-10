@@ -13,30 +13,30 @@ const { checkRoleAuth } = require("../middleware/roleAuth");
 
 const routerUser = Router();
 
-routerUser.get("/", checkAuth, checkRoleAuth(["VENDEDOR"]), renderUser);
+routerUser.get("/", checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), renderUser);
 routerUser.post("/", createUser);
 routerUser.get(
   "/:id",
   checkAuth,
-  checkRoleAuth(["user"]),
+  checkRoleAuth(["CLIENTE","ADMIN"]),
   renderUserEdit
 );
 routerUser.put(
   "/:id",
   checkAuth,
-  checkRoleAuth(["user", "admin"]),
+  checkRoleAuth(["CLIENTE","ADMIN"]),
   editUser
 );
 routerUser.delete(
   "/:id",
   checkAuth,
-  checkRoleAuth(["user", "admin"]),
+  checkRoleAuth(["CLIENTE","ADMIN"]),
   deleteUser
 );
 routerUser.put(
   "/toogleActive/:id",
   checkAuth,
-  checkRoleAuth(["user"]),
+  checkRoleAuth(["CLIENTE","ADMIN"]),
   toogleUserActive
 );
 

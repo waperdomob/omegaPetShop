@@ -12,11 +12,11 @@ const { checkRoleAuth } = require ("../middleware/roleAuth");
 
 const routerSale = Router();
 
-routerSale.get("/",checkAuth, checkRoleAuth(["VENDEDOR"]), renderSale);
-routerSale.post("/",checkAuth, checkRoleAuth(["VENDEDOR"]), createSale);
-routerSale.get("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), renderSaleEdit);
-routerSale.put("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), editSale);
-routerSale.delete("/:id",checkAuth, checkRoleAuth(["VENDEDOR"]), deleteSale);
+routerSale.get("/",checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), renderSale);
+routerSale.post("/",checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), createSale);
+routerSale.get("/:id",checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), renderSaleEdit);
+routerSale.put("/:id",checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), editSale);
+routerSale.delete("/:id",checkAuth, checkRoleAuth(["CLIENTE","ADMIN"]), deleteSale);
 
 //routerSale.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )
 //routerSale.get("/user/toogleActive/:id", checkAuth, checkRoleAuth(['user']), toogleUserActive )

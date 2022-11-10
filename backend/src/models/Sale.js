@@ -3,24 +3,20 @@ const {Schema, model} = require("mongoose")
 const saleSchema = new Schema(
   {
     
-    cantidad: {
-      type: Number,
-      required: true,
+    metodoPago: {
+      type: String, enum: [ "Tarjeta Crédito", "Tarjeta Débito", "PSE" ] ,
+      default: "Tarjeta Crédito",
+    },    
+    fecha: {
+      type: Date,
+      default: new Date(),
     },
-    precio: {
+    total: {
       type: Number,
-    },
-    client: {
-      type: Schema.Types.ObjectId,
-      ref: "client",
     },
     user: {
       type: Schema.Types.ObjectId,
       ref: "user",
-    },
-    product: {
-      type: Schema.Types.ObjectId,
-      ref: "product",
     },
   },
   {

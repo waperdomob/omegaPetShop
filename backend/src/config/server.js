@@ -2,8 +2,8 @@ const express = require("express")
 
 const routerProducto = require("../routes/product")
 const routerUsuario = require("../routes/user")
-const routerCliente = require("../routes/client")
 const routerSale = require("../routes/sale")
+const routerSaleDetail = require("../routes/saleDetail")
 const routerLogin = require("../routes/login")
 
 const connectDB = require("./database")
@@ -31,7 +31,7 @@ class Server {
     this.aplicacion.use("/usuario", routerUsuario)
     this.aplicacion.use("/producto", routerProducto)
     this.aplicacion.use("/venta", routerSale)
-    this.aplicacion.use("/cliente", routerCliente)
+    this.aplicacion.use("/Detalleventa", routerSaleDetail)
     this.aplicacion.use("/login", routerLogin)
 
   }

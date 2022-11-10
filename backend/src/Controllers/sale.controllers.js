@@ -4,7 +4,7 @@ const { handleError } = require("../helper/handleError") ;
 const fs = require("fs") 
 
 const Sale = require("../models/Sale") ;
-const { upload } = require("../middleware/storage");
+const SaleDetail = require("../models/SaleDetail") ;
 
 const renderSale = async (req, res) => {
   try {
@@ -19,10 +19,18 @@ const renderSale = async (req, res) => {
 const createSale = async (req, res) => {
   try {
     const newSale = new Sale(req.body);
-    console.log(newSale)
-    
     const savedSale = await newSale.save();
-    //res.json(savedSale);
+
+    const idVenta = savedSale.id;
+
+    //Se obtienen los productos del carrito y se guardan como detalle de venta, despues de guardar la venta
+    for (let clave in req.body["productos"]){
+      //Se agrega el id de la venta al detalleVenta
+      req.body["productos"][clave].venta = idVenta;
+      const newSaleDetail = new SaleDetail(req.body["productos"][clave]);//se crea el objeto SaleDetail
+      await newSaleDetail.save();//Se guarda el detalle de la venta
+    }
+    
     res.status(201).send({mensaje: "se creo la venta", savedSale});
   } catch (error) {
     handleError(req, res, error);
@@ -37,12 +45,13 @@ const renderSaleEdit = async (req, res) => {
       res.status(404).json({ msg: "id no valido" });
     } else {
       const saleExist = await Sale.findById({ _id: id });
+      const saleDetails = await SaleDetail.find({venta:id});
       if (!saleExist) {
         res
           .status(404)
-          .json({ msg: "no existe el producto que se va a actualizar" });
+          .json({ msg: "no existe la venta que se va a actualizar" });
       } else {
-        res.json(saleExist);
+        res.json({saleExist,saleDetails});
       }
     }
   } catch (error) {
