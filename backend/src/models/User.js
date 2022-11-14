@@ -8,6 +8,7 @@ const userSchema = new Schema(
     numeroDoc: {
       type: String,
       required: [true, "¡El numero de documento es obligatorio!"],
+      unique:true
     },
     name: {
       nombre: String, apellido: String

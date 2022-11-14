@@ -18,8 +18,14 @@ const createUser = async (req, res) => {
     const users = User(req.body);
     console.log(users);
     users.password = await encrypt(users.password);
-    const userSaved = await users.save();
-    res.json({ msg: "usuarios salvado" });
+    const userExist = await User.findOne({ email: users.email });
+    if (userExist) {
+      res.json({ msg: "El usuario ya existe" });
+    } else {
+      const userSaved = await users.save();
+      res.json({ msg: "usuario registrado",userSaved });
+    }
+   
   } catch (error) {
     handleError(req, res, error);
   }

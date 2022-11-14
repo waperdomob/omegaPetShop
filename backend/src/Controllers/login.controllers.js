@@ -7,6 +7,7 @@ const User = require("../models/User") ;
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     const user = await User.findOne({ email });
     if (!user) {
       res.status(404);
@@ -31,6 +32,7 @@ const login = async (req, res) => {
     res.json({
       data: user,
       tokenSession,
+      msg: "Login satisfactorio",
     });
     
   } catch (error) {

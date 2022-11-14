@@ -1,4 +1,5 @@
 const express = require("express")
+var cors = require('cors')
 
 const routerProducto = require("../routes/product")
 const routerUsuario = require("../routes/user")
@@ -16,6 +17,8 @@ class Server {
 
     // Middlewares
     this.aplicacion.use( express.json() )
+    this.aplicacion.use(cors()) // Use this after the variable declaration
+
     this.aplicacion.use(fileUpload({
       useTempFiles : true,
       tempFileDir : '/tmp/'
